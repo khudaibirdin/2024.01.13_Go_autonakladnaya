@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Сформированная накладная</title>
+        
+        <link rel="stylesheet" type="text/css" href="/templates/site_3_style.css" />
+    </head>
+    <body>
+        <div style="text-align: center;">Материальный пропуск № {{ .Number_of_document }}/3500/{{.Year}}</div>
+        <div style="text-align: center;"> {{.Entry_data.Date_today}} </div>
+        <br />
+        <div>
+            <table class="table1">
+                <tr><td>Кому:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.For_whom}}</td></tr>
+                <tr><td>От кого:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.From_whom}}</td></tr>
+                <tr><td>Назначение использования материалов:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.For_what}}</td></tr>
+                <tr><td>Объект проведения работ:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.Where}}</td></tr>
+                <tr><td>Дата вывоза:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.Date_of_getout}}</td></tr>
+            </table>
+        </div>
+        <br />
+        <div>
+            <table class="table2">
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Номенклатурный номер<br />материала и (или)<br />инвентарный номер ОС
+                    </th>
+                    <th>Наименование</th>
+                    <th>ЕИ</th>
+                    <th>Кол-во<br />(шт.)</th>
+                    <th>Цена<br />(руб)</th>
+                    <th>Сумма<br />(руб)</th>
+                    <th>Примечание</th>
+                </tr>
+                {{ range .Table_data.Items }}
+                <tr>
+                    <td>{{ .Row_number }}</td>
+                    <td>{{ .Entry_nom_number }}</td>
+                    <td>{{ .Entry_name }}</td>
+                    <td>{{ .Combobox_ei }}</td>
+                    <td>{{ .Entry_amount }}</td>
+                    <td>{{ .Entry_price }}</td>
+                    <td>{{ .Entry_summ }}</td>
+                    <td>{{ .Entry_note }}</td>
+                </tr>
+                {{ end }}
+                <tr>
+                    <td>Итого:</td>
+                    <td></td>
+                    <td></td>
+                    <td>шт</td>
+                    <td>{{.Amount_summ}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br />
+            <table class="table3">
+                <tr>
+                    <td style="text-align:left;" width="35">Отпуск разрешил:</td>
+                    <td width="20"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_permitted}}</td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_permitted}}</td></tr>
+                <tr>
+                    <td width="35"></td>
+                    <td width="20"></td>
+                    <td width="35" style="font-size: 10px;">(должность)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(подпись)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(расшифровка подписи)</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;" width="35">Наличие проверил:</td>
+                    <td width="20"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_presense}}</td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_presense}}</td>
+                </tr>
+                <tr>
+                    <td width="35"></td>
+                    <td width="20"></td>
+                    <td width="35">(должность)</td>
+                    <td width="10"></td>
+                    <td width="35">(подпись)</td>
+                    <td width="10"></td>
+                    <td width="35">(расшифровка подписи)</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;" width="35">Отпустил:</td>
+                    <td width="20"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_gave}}</td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_gave}}</td>
+                </tr>
+                <tr>
+                    <td width="35"></td>
+                    <td width="20"></td>
+                    <td width="35" style="font-size: 10px;">(должность)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(подпись)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(расшифровка подписи)</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;" width="35">Получил:</td>
+                    <td width="20"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_got}}</td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
+                    <td width="10"></td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_got}}</td>
+                </tr>
+                <tr>
+                    <td width="35"></td>
+                    <td width="20"></td>
+                    <td width="35" style="font-size: 10px;">(должность)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(подпись)</td>
+                    <td width="10"></td>
+                    <td width="35" style="font-size: 10px;">(расшифровка подписи)</td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <dev>
+            Заполняется при перевозке материальных ценностей на автомобильном транспорте
+        </dev>
+        <dev>
+        </dev>
+    </body>
+</html>

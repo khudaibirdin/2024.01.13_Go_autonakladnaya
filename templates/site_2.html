@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>АвтоНакладная/Ввод данных</title>
+        <link rel="stylesheet" type="text/css" href="/templates/site_2_style.css" />
+    </head>
+    <body>
+        <div class="title">
+            <div>ООО "Газпром трансгаз Уфа"</div>
+            <div>Инженерно-технический центр</div>
+            <div>Служба КИПиА</div>
+            <div> </div>
+        </div>
+        <form>
+            <div class="main_body">
+                <div class="left_side">
+                    <div>Номенклатурный номер:</div>
+                    <div>Наименование:</div>
+                    <div>Единица измерения:</div>
+                    <div>Количество:</div>
+                    <div>Цена (руб):</div>
+                    <div>Сумма (руб):</div>
+                    <div>Примечание:</div>
+                </div>
+                <div class="right_side">
+                    <div><input type="text" name="entry_nom_number" required autocomplete="off"></div>
+                    <div><input type="text" name="entry_name" required autocomplete="off"></div>
+                    <div>
+                        <input type="text" name="entry_ei" required list="entry_ei" required autocomplete="off" value="шт">
+                        <datalist id="entry_ei">
+                            <option value="шт">шт</option>
+                            <option value="компл.">компл.</option>
+                            <option value="кг">кг</option>
+                        </datalist>
+                    </div>
+                    <div><input type="text" name="entry_amount" required value="1" autocomplete="off"></div>
+                    <div><input type="text" name="entry_price" value="–" autocomplete="off"></div>
+                    <div><input type="text" name="entry_summ" value="–" autocomplete="off"></div>
+                    <div><input type="text" name="entry_note" value="–" autocomplete="off"></div>
+                </div>
+            </div>
+        <div class="bottom">
+            <form>
+                <div><button name="button_addrow" type="submit" formaction="AddRow">Добавить запись</button></div>
+            </form>
+            {{ if .Items }}
+            <form>
+                <div><button style="background-color: #00B25C;" name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
+            </form>
+            {{ else }}
+            <form>
+                <div><button style="background-color: #00B25C;" disabled name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
+            </form>
+            {{ end }}
+        </div>
+        <div class="bottom">
+            {{ if .Items }}
+            <form>
+                <div><button name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
+            </form>
+            {{ else }}
+            <form>
+                <div><button disabled name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
+            </form>
+            {{ end }}
+            <form>
+                <div><button name="button_getback" type="submit" formaction="GetBack">Вернуться назад</button></div>
+            </form>
+        </div>
+        <div><br /></div>
+        </form>
+        <div class="bottom_table">
+            <table>
+                <tr>
+                    <th>№ п/п</th>
+                    <th>Номенкл. номер</th>
+                    <th>Наимен.</th>
+                    <th>ЕИ</th>
+                    <th>Кол-во</th>
+                    <th>Цена</th>
+                    <th>Сумма</th>
+                    <th>Примечание</th>
+                </tr>
+                {{ range .Items }}
+                <tr>
+                    <td>{{ .Row_number }}</td>
+                    <td>{{ .Entry_nom_number }}</td>
+                    <td>{{ .Entry_name }}</td>
+                    <td>{{ .Combobox_ei }}</td>
+                    <td>{{ .Entry_amount }}</td>
+                    <td>{{ .Entry_price }}</td>
+                    <td>{{ .Entry_summ }}</td>
+                    <td>{{ .Entry_note }}</td>
+                </tr>
+                {{ end }}
+            </table>
+        </div>
+    </body>
+</html>

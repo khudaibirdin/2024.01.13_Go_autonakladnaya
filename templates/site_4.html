@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>База данных</title>
+    </head>
+    <body>
+        <dev>
+            <form>
+                <button type="submit" formaction="DeleteLastRowInDatabase">Удалить последнюю запись</button>
+            </form>
+        </dev>
+        <dev>
+            <table style="border-collapse: collapse;">
+                {{range .Data}}
+                <tr>
+                    <td width="3%" style="text-align: center; border: 1px solid black;">{{.Number_of_document}}</td>
+                    <td width="5%" style="text-align: center; border: 1px solid black;">{{.Date}}</td>
+                    <td width="20%" style="text-align: center; border: 1px solid black;">{{.For_whom}}</td>
+                    <td width="20%" style="text-align: center; border: 1px solid black;">{{.From_whom}}</td>
+                    <td width="20%" style="text-align: center; border: 1px solid black;">{{.For_what}}</td>
+                </tr>
+                {{end}}
+            </table>
+        </dev>
+    </body>
+</html>
