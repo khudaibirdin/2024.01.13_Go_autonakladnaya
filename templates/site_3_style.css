@@ -36,7 +36,19 @@ table.table2 th {
 table.table2 td {
     border: 1px solid black;
 }
-table.table3 {
+.table3 {
+    width: 100%;
+    text-align:center;
+    table-layout:fixed;
+}
+.table4 {
+    width: 100%;
+    text-align:center;
+}
+.table4 tr {
+    height: 10px;
+}
+.table5 {
     width: 100%;
     text-align:center;
 }

@@ -120,6 +120,9 @@ func DelRow(w http.ResponseWriter, r *http.Request) {
 // функция для передачи данных в документ
 // создание документа прямо в html-странице
 func MakeDocument(w http.ResponseWriter, r *http.Request) {
+	if len(received_data_2.Items) == 0 {
+		return
+	}
 	doc_number, _ := strconv.Atoi(GetData())             // из строки в число
 	new_doc_number := fmt.Sprintf("%010d", doc_number+1) // наоборот из числа в строку с + 1 как новый документ
 	data := fmt.Sprintf(`(%s, "%s", "%s", "%s", "%s")`,
@@ -141,9 +144,7 @@ func MakeDocument(w http.ResponseWriter, r *http.Request) {
 		Number_of_document: new_doc_number,
 		Year:               received_data_1.Date_today[6:10],
 		Amount_summ:        strconv.Itoa(amount_summ)}
-	if len(received_data_2.Items) == 0 {
-		return
-	}
+
 	templ, err := template.ParseFiles("templates/site_3.html")
 	if err != nil {
 		fmt.Println(err)
