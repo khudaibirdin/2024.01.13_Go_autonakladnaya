@@ -6,6 +6,10 @@
         <link rel="stylesheet" type="text/css" href="/templates/site_3_style.css" />
     </head>
     <body>
+        <input id="printPageButton" type="button" value="Распечатать" onClick="window.print()">
+        <form method="POST" action="PageMain">
+            <input id="button_close" type="submit" value="Закрыть">
+        </form>
         <div style="text-align: center;">Материальный пропуск № {{ .Number_of_document }}/3500/{{.Year}}</div>
         <div style="text-align: center;"> {{.Entry_data.Date_today}} </div>
         <br />

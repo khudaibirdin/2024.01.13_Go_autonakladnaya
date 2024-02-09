@@ -40,35 +40,35 @@
                     <div><input type="text" name="entry_note" value="–" autocomplete="off"></div>
                 </div>
             </div>
-        <div class="bottom">
-            <form>
-                <div><button name="button_addrow" type="submit" formaction="AddRow">Добавить запись</button></div>
-            </form>
-            {{ if .Items }}
-            <form>
-                <div><button style="background-color: #00B25C;" name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
-            </form>
-            {{ else }}
-            <form>
-                <div><button style="background-color: #00B25C;" disabled name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
-            </form>
-            {{ end }}
-        </div>
-        <div class="bottom">
-            {{ if .Items }}
-            <form>
-                <div><button name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
-            </form>
-            {{ else }}
-            <form>
-                <div><button disabled name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
-            </form>
-            {{ end }}
-            <form>
-                <div><button name="button_getback" type="submit" formaction="GetBack">Вернуться назад</button></div>
-            </form>
-        </div>
-        <div><br /></div>
+            <div class="bottom">
+                <form>
+                    <div><button name="button_addrow" type="submit" formaction="AddRow">Добавить запись</button></div>
+                </form>
+                {{ if .Items }}
+                <form>
+                    <div><button style="background-color: #00B25C;" name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
+                </form>
+                {{ else }}
+                <form>
+                    <div><button style="background-color: #00B25C;" disabled name="button_makedocument" type="submit" formaction="MakeDocument">Создать документ</button></div>
+                </form>
+                {{ end }}
+            </div>
+            <div class="bottom">
+                {{ if .Items }}
+                <form>
+                    <div><button name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
+                </form>
+                {{ else }}
+                <form>
+                    <div><button disabled name="button_delrow" type="submit" formaction="DelRow">Удалить запись</button></div>
+                </form>
+                {{ end }}
+                <form>
+                    <div><button name="button_getback" type="submit" formaction="PageMain">Вернуться назад</button></div>
+                </form>
+            </div>
+            <div><br /></div>
         </form>
         <div class="bottom_table">
             <table>
