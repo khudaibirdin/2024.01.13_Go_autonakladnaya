@@ -19,6 +19,7 @@ var configdata ConfigData
 
 // функция обработки первой (главной) страницы
 func PageMain(w http.ResponseWriter, r *http.Request) {
+	received_data_2.Items = received_data_2.Items[:0]
 	time := time.Now()
 	data_for_site_1 := DataForSite1{
 		Data1: userdata,
@@ -156,6 +157,16 @@ func MakeDocument(w http.ResponseWriter, r *http.Request) {
 // удалить последнюю строку из базы данных
 func DeleteLastRowInDatabase(w http.ResponseWriter, r *http.Request) {
 	DeleteLastRow()
+	time := time.Now()
+	data_for_site_1 := DataForSite1{
+		Data1: userdata,
+		Data2: lastdata,
+		Data3: time.Format("2006-01-02")}
+	templ, err := template.ParseFiles("templates/site_1.html")
+	if err != nil {
+		fmt.Println(err)
+	}
+	templ.Execute(w, data_for_site_1)
 }
 
 func main() {
@@ -193,7 +204,7 @@ func main() {
 	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("templates"))))
 
 	// обработчики страниц в браузере
-	http.HandleFunc("/", PageMain)
+	http.HandleFunc("/PageMain", PageMain)
 	http.HandleFunc("/continue", PageContinue)
 	http.HandleFunc("/open_archive", OpenArchive)
 	http.HandleFunc("/AddRow", AddRow)
@@ -203,6 +214,6 @@ func main() {
 	fmt.Println("Server is listening...")
 
 	// открытие приложения в браузере
-	exec.Command("explorer", "http://localhost:8181/").Run()
+	exec.Command("explorer", "http://localhost:8181/PageMain").Run()
 	http.ListenAndServe("localhost:8181", nil)
 }

@@ -58,3 +58,11 @@ hr {
     color: black;
     border-top: 2px solid #000;
 }
+@media print {
+    #printPageButton {
+      display: none;
+    }
+    #button_close {
+        display: none;
+      }
+  }
