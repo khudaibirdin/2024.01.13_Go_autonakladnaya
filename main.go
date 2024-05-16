@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -17,8 +18,10 @@ var received_data_2 ReceivedData_2
 var lastdata UserData_2
 var configdata ConfigData
 
-// функция обработки первой (главной) страницы
 func PageMain(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция обработки первой (главной) страницы
+	*/
 	received_data_2.Items = received_data_2.Items[:0]
 	time := time.Now()
 	data_for_site_1 := DataForSite1{
@@ -32,9 +35,11 @@ func PageMain(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, data_for_site_1)
 }
 
-// функция обработки нажатия кнопки "Продолжить"
-// получается информация с форм html
 func PageContinue(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция обработки нажатия кнопки "Продолжить"
+		получается информация с форм html
+	*/
 	// параметры, переданные с форм заполнения после первой страницы
 	received_data_1.For_whom = r.FormValue("entry_for_whom")
 	received_data_1.From_whom = r.FormValue("entry_from_whom")
@@ -52,9 +57,8 @@ func PageContinue(w http.ResponseWriter, r *http.Request) {
 	received_data_1.Person_name_gave = r.FormValue("entry_person_name_gave")
 	received_data_1.Person_status_got = r.FormValue("entry_person_status_got")
 	received_data_1.Person_name_got = r.FormValue("entry_person_name_got")
-
 	// проверка особого ввода для отображения таблицы базы данных в окне браузера
-	if (r.FormValue("entry_person_status_got") == "db") && (r.FormValue("entry_person_name_got") == "db") {
+	if (r.FormValue("entry_person_status_got") == "db") && (r.FormValue("entry_person_name_got") == "db") { // обработка db db для отображения страницы с таблицей БД
 		data := Show_database()
 		templ, err := template.ParseFiles("templates/site_4.html")
 		if err != nil {
@@ -73,16 +77,21 @@ func PageContinue(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// функция обработки нажатия кнопки "Открыть архив"
-// происходит открытие Excel файла
 func OpenArchive(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция обработки нажатия кнопки "Открыть архив"
+		происходит открытие Excel файла
+	*/
 	cmd := exec.Command("explorer", "archive.xlsx")
 	cmd.Run()
 }
 
-// функция для обработки нажатия кнопки "Добавить строку"
-// добавление строки в таблицу на сайте, а также в массив в основной программе
 func AddRow(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция для обработки нажатия кнопки "Добавить строку"
+		добавление строки в таблицу на сайте, а также в массив в основной программе
+	*/
+	// получение данных с форм на сайте
 	entry_nom_number := r.FormValue("entry_nom_number")
 	entry_name := r.FormValue("entry_name")
 	combobox_ei := r.FormValue("combobox_ei")
@@ -90,6 +99,7 @@ func AddRow(w http.ResponseWriter, r *http.Request) {
 	entry_price := r.FormValue("entry_price")
 	entry_summ := r.FormValue("entry_summ")
 	entry_note := r.FormValue("entry_note")
+	// добавление полученных данных в структуру
 	view := ReceivedData_2_view{
 		Row_number:       len(received_data_2.Items) + 1, // новая строка с +1 номером
 		Entry_nom_number: entry_nom_number,
@@ -107,9 +117,11 @@ func AddRow(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, received_data_2)
 }
 
-// функция для обработки нажатия кнопки "Удалить строку"
-// удаление строки с таблицы на сайте, а также с массива в основной программе
 func DelRow(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция для обработки нажатия кнопки "Удалить строку"
+		удаление строки с таблицы на сайте, а также с массива в основной программе
+	*/
 	received_data_2.Items = received_data_2.Items[:len(received_data_2.Items)-1]
 	templ, err := template.ParseFiles("templates/site_2.html")
 	if err != nil {
@@ -118,12 +130,15 @@ func DelRow(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, received_data_2)
 }
 
-// функция для передачи данных в документ
-// создание документа прямо в html-странице
 func MakeDocument(w http.ResponseWriter, r *http.Request) {
+	/*
+		функция для передачи данных в документ
+		создание документа прямо в html-странице
+	*/
 	if len(received_data_2.Items) == 0 {
 		return
 	}
+	// получение крайнего номера из БД
 	doc_number, _ := strconv.Atoi(GetData())             // из строки в число
 	new_doc_number := fmt.Sprintf("%010d", doc_number+1) // наоборот из числа в строку с + 1 как новый документ
 	data := fmt.Sprintf(`(%s, "%s", "%s", "%s", "%s")`,
@@ -132,6 +147,7 @@ func MakeDocument(w http.ResponseWriter, r *http.Request) {
 		received_data_1.For_whom,
 		received_data_1.From_whom,
 		received_data_1.For_what)
+	// добавление новых данных в БД
 	rows := `("number", "date", "for_whom", "from_whom", "for_what")`
 	InsertData("archive", rows, data)
 	var amount_summ int
@@ -145,17 +161,21 @@ func MakeDocument(w http.ResponseWriter, r *http.Request) {
 		Number_of_document: new_doc_number,
 		Year:               received_data_1.Date_today[6:10],
 		Amount_summ:        strconv.Itoa(amount_summ)}
-
 	templ, err := template.ParseFiles("templates/site_3.html")
 	if err != nil {
 		fmt.Println(err)
 	}
 	templ.Execute(w, SendData)
+	var tp bytes.Buffer
+	templ.Execute(&tp, SendData)
+	data = tp.String()
+	filename := ".\\" + "userfiles\\" + SendData.Year + "-" + SendData.Number_of_document + ".html"
+	SaveHTMLToFile(filename, data)
 	received_data_2.Items = received_data_2.Items[:0]
 }
 
-// удалить последнюю строку из базы данных
 func DeleteLastRowInDatabase(w http.ResponseWriter, r *http.Request) {
+	// удалить последнюю строку из базы данных
 	DeleteLastRow()
 	time := time.Now()
 	data_for_site_1 := DataForSite1{
@@ -179,7 +199,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(configdata.Database_path)
 	// чтение данных с файла json с пользовательским списком для input
 	jsonFile, err := os.ReadFile("./appfiles/user_data.json")
 	if err != nil {
@@ -189,7 +208,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	// чтение данных с файла json с последними введенными данными
 	jsonFile2, err := os.ReadFile("./appfiles/last_data.json")
 	if err != nil {
@@ -199,10 +217,8 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	// добавление шаблонов в частности для работы css файлов с html шаблонами
 	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("templates"))))
-
 	// обработчики страниц в браузере
 	http.HandleFunc("/PageMain", PageMain)
 	http.HandleFunc("/continue", PageContinue)
@@ -212,7 +228,6 @@ func main() {
 	http.HandleFunc("/MakeDocument", MakeDocument)
 	http.HandleFunc("/DeleteLastRowInDatabase", DeleteLastRowInDatabase)
 	fmt.Println("Server is listening...")
-
 	// открытие приложения в браузере
 	exec.Command("explorer", "http://localhost:8181/PageMain").Run()
 	http.ListenAndServe("localhost:8181", nil)

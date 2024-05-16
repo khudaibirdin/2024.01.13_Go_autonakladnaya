@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Сформированная накладная</title>
-        <!--<link rel="stylesheet" type="text/css" href="/templates/site_3_style.css" />-->
+        
         <style>
             @page {
                 margin: 10mm 10mm 10mm 20mm;
@@ -79,16 +79,16 @@
         <form method="POST" action="PageMain">
             <input id="button_close" type="submit" value="Закрыть">
         </form>
-        <div style="text-align: center;">Материальный пропуск № {{ .Number_of_document }}/3500/{{.Year}}</div>
-        <div style="text-align: center;"> {{.Entry_data.Date_today}} </div>
+        <div style="text-align: center;">Материальный пропуск № 0000001391/3500/2024</div>
+        <div style="text-align: center;"> 16.05.2024 </div>
         <br />
         <div>
             <table class="table1">
-                <tr><td>Кому:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.For_whom}}</td></tr>
-                <tr><td>От кого:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.From_whom}}</td></tr>
-                <tr><td>Назначение использования материалов:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.For_what}}</td></tr>
-                <tr><td>Объект проведения работ:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.Where}}</td></tr>
-                <tr><td>Дата вывоза:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">{{.Entry_data.Date_of_getout}}</td></tr>
+                <tr><td>Кому:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Салихову И.И., начальнику САиМО Шаранского ЛПУМГ</td></tr>
+                <tr><td>От кого:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Ракипова Р.Ф., начальника СКИПиА ИТЦ</td></tr>
+                <tr><td>Назначение использования материалов:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">После ТО, ремонта и поверки</td></tr>
+                <tr><td>Объект проведения работ:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Шаранское ЛПУМГ</td></tr>
+                <tr><td>Дата вывоза:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">16.05.2024</td></tr>
             </table>
         </div>
         <br />
@@ -105,24 +105,24 @@
                     <th>Сумма<br />(руб)</th>
                     <th>Примечание</th>
                 </tr>
-                {{ range .Table_data.Items }}
+                
                 <tr>
-                    <td>{{ .Row_number }}</td>
-                    <td>{{ .Entry_nom_number }}</td>
-                    <td>{{ .Entry_name }}</td>
-                    <td>{{ .Combobox_ei }}</td>
-                    <td>{{ .Entry_amount }}</td>
-                    <td>{{ .Entry_price }}</td>
-                    <td>{{ .Entry_summ }}</td>
-                    <td>{{ .Entry_note }}</td>
+                    <td>1</td>
+                    <td>1231321</td>
+                    <td>1231231</td>
+                    <td></td>
+                    <td>1</td>
+                    <td>–</td>
+                    <td>–</td>
+                    <td>–</td>
                 </tr>
-                {{ end }}
+                
                 <tr>
                     <td>Итого:</td>
                     <td></td>
                     <td></td>
                     <td>шт</td>
-                    <td>{{.Amount_summ}}</td>
+                    <td>1</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -133,11 +133,11 @@
                 <tr>
                     <td style="text-align:left;" width="35">Отпуск разрешил:</td>
                     <td width="20"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_permitted}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">Руководитель ГПТО</td>
                     <td width="10"></td>
                     <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                     <td width="10"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_permitted}}</td></tr>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">А.В. Карманчук</td></tr>
                 <tr>
                     <td width="35"></td>
                     <td width="20"></td>
@@ -150,11 +150,11 @@
                 <tr>
                     <td style="text-align:left;" width="35">Наличие проверил:</td>
                     <td width="20"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_presense}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">Начальник СКИПиА</td>
                     <td width="10"></td>
                     <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                     <td width="10"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_presense}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">Р.Ф. Ракипов</td>
                 </tr>
                 <tr>
                     <td width="35"></td>
@@ -168,11 +168,11 @@
                 <tr>
                     <td style="text-align:left;" width="35">Отпустил:</td>
                     <td width="20"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_gave}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">Начальник СКИПиА</td>
                     <td width="10"></td>
                     <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                     <td width="10"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_gave}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">Р.Ф. Ракипов</td>
                 </tr>
                 <tr>
                     <td width="35"></td>
@@ -186,11 +186,11 @@
                 <tr>
                     <td style="text-align:left;" width="35">Получил:</td>
                     <td width="20"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_status_got}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                     <td width="10"></td>
                     <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                     <td width="10"></td>
-                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35">{{.Entry_data.Person_name_got}}</td>
+                    <td style="border-bottom-style:solid;border-bottom-width:1px;" width="35"></td>
                 </tr>
                 <tr>
                     <td width="35"></td>
