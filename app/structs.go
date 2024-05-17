@@ -40,6 +40,7 @@ type ReceivedData_1 struct {
 	From_whom               string
 	For_what                string
 	Where                   string
+	Direction               string
 	Date_today              string
 	Date_of_getout          string
 	Person_status_permitted string

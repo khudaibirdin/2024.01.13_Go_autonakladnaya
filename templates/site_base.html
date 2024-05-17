@@ -1,0 +1,37 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СлужбаКИП</title>
+    <link rel="stylesheet" href="/static/site_base.css" />
+</head>
+
+<body>
+    <div class="block_head">
+        <div>СлужбаКИП</div>
+        <div class="block_menu">
+            <!--<form action="/balance">
+                <input type="submit" value="Баланс расходов">
+            </form>
+            <form action="/tasks">
+                <input type="submit" value="Служебные задачи">
+            </form>-->
+            <form action="/PageMain">
+                <input class="block_menu_input" type="submit" value="Накладные">
+            </form>
+            <form action="/PageAbout">
+                <input class="block_menu_input" type="submit" value="О проекте">
+            </form>
+        </div>
+    </div>
+
+    <div class="block_body">
+        {{template "content" .}}
+        {{end}}
+    </div>
+    <div class="block_bottom"></div>
+</body>
+
+</html>

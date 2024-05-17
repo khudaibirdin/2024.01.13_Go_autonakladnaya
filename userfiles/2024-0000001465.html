@@ -68,27 +68,31 @@
                 #printPageButton {
                 display: none;
                 }
-                #button_close {
+                #button_close, #button_back, #info {
                     display: none;
                 }
             }
         </style>
     </head>
     <body>
+        <div id="info" style="font-size: 24px;">Сформированный документ. Новый номер зафиксирован в базе данных.</div>
         <input id="printPageButton" type="button" value="Распечатать" onClick="window.print()">
         <form method="POST" action="PageMain">
             <input id="button_close" type="submit" value="Закрыть">
         </form>
-        <div style="text-align: center;">Материальный пропуск № 0000001391/3500/2024</div>
-        <div style="text-align: center;"> 16.05.2024 </div>
+        <form method="POST" action="DeleteLastRowInDatabase">
+            <input id="button_back" type="submit" value="Отменить регистрацию документа">
+        </form>
+        <div style="text-align: center;">Материальный пропуск № 0000001465/3500/2024</div>
+        <div style="text-align: center;"> 17.05.2024 </div>
         <br />
         <div>
             <table class="table1">
-                <tr><td>Кому:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Салихову И.И., начальнику САиМО Шаранского ЛПУМГ</td></tr>
+                <tr><td>Кому:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Ракипову Р.Ф., начальнику СКИПиА ИТЦ</td></tr>
                 <tr><td>От кого:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Ракипова Р.Ф., начальника СКИПиА ИТЦ</td></tr>
                 <tr><td>Назначение использования материалов:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">После ТО, ремонта и поверки</td></tr>
                 <tr><td>Объект проведения работ:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">Шаранское ЛПУМГ</td></tr>
-                <tr><td>Дата вывоза:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">16.05.2024</td></tr>
+                <tr><td>Дата ввоза:</td><td style="border-bottom-style:solid;border-bottom-width:1px;">17.05.2024</td></tr>
             </table>
         </div>
         <br />
@@ -100,7 +104,7 @@
                     </th>
                     <th>Наименование</th>
                     <th>ЕИ</th>
-                    <th>Кол-во<br />(шт.)</th>
+                    <th>Кол-во</th>
                     <th>Цена<br />(руб)</th>
                     <th>Сумма<br />(руб)</th>
                     <th>Примечание</th>
@@ -108,9 +112,9 @@
                 
                 <tr>
                     <td>1</td>
-                    <td>1231321</td>
-                    <td>1231231</td>
-                    <td></td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>шт</td>
                     <td>1</td>
                     <td>–</td>
                     <td>–</td>
@@ -121,7 +125,7 @@
                     <td>Итого:</td>
                     <td></td>
                     <td></td>
-                    <td>шт</td>
+                    <td></td>
                     <td>1</td>
                     <td></td>
                     <td></td>
