@@ -46,6 +46,7 @@ func PageContinue(w http.ResponseWriter, r *http.Request) {
 	date_1_string := r.FormValue("date_today")
 	date_2_string := r.FormValue("date_of_getout")
 	received_data_1.Date_today = date_1_string[8:10] + "." + date_1_string[5:7] + "." + date_1_string[0:4] // из гггг-мм-дд в дд.мм.гггг
+	received_data_1.Date_today_for_files = date_1_string
 	received_data_1.Date_of_getout = date_2_string[8:10] + "." + date_2_string[5:7] + "." + date_2_string[0:4]
 	received_data_1.Person_status_permitted = r.FormValue("entry_person_status_permitted")
 	received_data_1.Person_name_permitted = r.FormValue("entry_person_name_permitted")
@@ -156,7 +157,7 @@ func MakeDocument(w http.ResponseWriter, r *http.Request) {
 	var tp bytes.Buffer
 	templ.Execute(&tp, SendData)
 	data = tp.String()
-	filename := "..\\" + "userfiles\\" + SendData.Year + "-" + SendData.Number_of_document + ".html"
+	filename := "..\\" + "userfiles\\" + received_data_1.Date_today_for_files + "-" + strconv.Itoa(doc_number+1) + ".html"
 	SaveHTMLToFile(filename, data)
 	received_data_2.Items = received_data_2.Items[:0]
 }

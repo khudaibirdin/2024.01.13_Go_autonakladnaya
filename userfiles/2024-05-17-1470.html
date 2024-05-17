@@ -75,15 +75,15 @@
         </style>
     </head>
     <body>
-        <div id="info" style="font-size: 24px;">Сформированный документ. Новый номер документа зафиксирован в базе данных.</div>
+        <div id="info" style="font-size: 24px;">Сформированный документ. Новый номер зафиксирован в базе данных.</div>
         <input id="printPageButton" type="button" value="Распечатать" onClick="window.print()">
         <form method="POST" action="PageMain">
             <input id="button_close" type="submit" value="Закрыть">
         </form>
-        <form method="POST" action="PageMain">
+        <form method="POST" action="DeleteLastRowInDatabase">
             <input id="button_back" type="submit" value="Отменить регистрацию документа">
         </form>
-        <div style="text-align: center;">Материальный пропуск № 0000001462/3500/2024</div>
+        <div style="text-align: center;">Материальный пропуск № 0000001470/3500/2024</div>
         <div style="text-align: center;"> 17.05.2024 </div>
         <br />
         <div>
@@ -122,22 +122,11 @@
                 </tr>
                 
                 <tr>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>шт</td>
-                    <td>1</td>
-                    <td>–</td>
-                    <td>–</td>
-                    <td>–</td>
-                </tr>
-                
-                <tr>
                     <td>Итого:</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>2</td>
+                    <td>1</td>
                     <td></td>
                     <td></td>
                     <td></td>

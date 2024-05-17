@@ -42,6 +42,7 @@ type ReceivedData_1 struct {
 	Where                   string
 	Direction               string
 	Date_today              string
+	Date_today_for_files	string
 	Date_of_getout          string
 	Person_status_permitted string
 	Person_name_permitted   string
