@@ -56,7 +56,6 @@ func GetData() string {
 	rows, _ := db.Query("select max(number) from archive")
 	for rows.Next() {
 		err := rows.Scan(&data)
-		fmt.Println(data)
 		if err != nil {
 			fmt.Println(err)
 		}
